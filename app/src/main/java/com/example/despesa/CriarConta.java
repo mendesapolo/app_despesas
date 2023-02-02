@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CriarConta extends AppCompatActivity {
-
+    protected User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,9 @@ public class CriarConta extends AppCompatActivity {
                 System.out.println(nome);
                 System.out.println(telefone);
                 System.out.println(senha);
+
+                User user = new User(nome, telefone, senha);
+                new UserDAO(v.getContext()).insert(user);
 
                 Intent intent = new Intent(CriarConta.this, HomeUser.class);
                 startActivity(intent);

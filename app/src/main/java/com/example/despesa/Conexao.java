@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Conexao extends SQLiteOpenHelper {
 
-    private static final String name = "dispesa.db";
+    private static final String name = "user.db";
     private static final int version = 1;
 
     public Conexao(Context context){
@@ -14,7 +14,7 @@ public class Conexao extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE despesa(id integer primary key autoincrement, nome varchar(70), valor double(8,2), is_pago tinyint)");
+        db.execSQL("CREATE TABLE user(id integer primary key autoincrement, nome varchar(70), telefone varchar(50), senha varchar(100))");
     }
 
     @Override

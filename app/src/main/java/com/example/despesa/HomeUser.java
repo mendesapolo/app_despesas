@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +19,14 @@ public class HomeUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_user);
 
-        //ListView listview = (ListView) findViewById(R.id.list_view_dispesa);
+        TextView txt1 = (TextView) findViewById(R.id.textView7);
+        txt1.setText("Menu nome");
 
-        List<String> lista = new ArrayList<String>();
-        lista.add("Pagar Energia eletrica");
-        lista.add("Comprar o gáz");
-        lista.add("Comprar o gáz");
+        TextView txt2 = (TextView) findViewById(R.id.textView9);
+        txt2.setText("Telefone");
 
-        userList = userDAO.listar();
+
+        //userList = userDAO.listar();
 
         //ListAdapter adapter = new ArrayAdapter<User>(this, R.layout.activity_home_user, userList);
         //listview.setAdapter(adapter);

@@ -6,37 +6,45 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import androidx.navigation.fragment.NavHostFragment;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText txtTelefone;
+    private EditText txtSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText txtTelefone = (EditText) findViewById(R.id.txtTelefone);
-        EditText txtSenha = (EditText) findViewById(R.id.txtSenha);
-        Button btnLogin = (Button) findViewById(R.id.btnLogin_id);
+        this.txtTelefone = (EditText) findViewById(R.id.txtTelefone);
+        this.txtSenha = (EditText) findViewById(R.id.txtSenha);
+
         Button btnCriarConta = (Button) findViewById(R.id.btnCriarConta_id);
+        Button btnLogar = (Button) findViewById(R.id.btnLogin_id);
 
-        String telefone = txtTelefone.getText().toString();
-        String senha = txtSenha.getText().toString();
+        btnLogar.setOnClickListener(v -> {
+            try {
+                String telefone = this.txtTelefone.getText().toString();
+                String senha = this.txtSenha.getText().toString();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+                if(!telefone.equals("")){
+                    User user = new UserDAO(this).getByTelefone(telefone);
+                    if(senha.equals(user.getSenha())){
+                        Intent intent = new Intent(this, HomeUser.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(this, "Dados de login incorrectos", Toast.LENGTH_SHORT);
+                    }
+                }
+            }catch (Exception ex){
+                Toast.makeText(this, ex.getMessage(),Toast.LENGTH_LONG);
             }
         });
-
-        btnCriarConta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CriarConta.class);
-                startActivity(intent);
-            }
+        btnCriarConta.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CriarConta.class);
+            startActivity(intent);
         });
     }
 }

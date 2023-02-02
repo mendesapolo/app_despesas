@@ -36,4 +36,13 @@ public class UserDAO {
         }
         return lista;
     }
+
+    public User getByTelefone(String telefone){
+        Cursor cursor = this.db.query(false,"user", new String[]{"id", "nome", "telefone", "senha"}, "telefone="+telefone,null,null,null,null,null,null);
+
+        User user = new User(cursor.getString(1),cursor.getString(2), cursor.getString(3));
+        user.setId(cursor.getInt(0));
+
+        return user;
+    }
 }
